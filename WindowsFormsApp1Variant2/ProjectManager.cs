@@ -42,7 +42,7 @@ namespace ContactsApp
                 Console.WriteLine($"PhoneNumber: {temp.number.Number}");
                 Console.WriteLine($"Surname: {temp.Birthday}");
                 Console.WriteLine($"E-mail: {temp.Mail}");
-                Console.WriteLine($"ID ВКонтакте: {temp.IdVk}");
+                
             }
 
             return 0;

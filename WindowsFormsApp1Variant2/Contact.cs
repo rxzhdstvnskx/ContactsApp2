@@ -24,6 +24,7 @@ namespace ContactsApp1Variant2
         public string Mail;
         public int IdVk;
 
+
         /// <summary>
         /// Метод-сеттер, предназначеннный для запсии фамилии экземпляра класса.
         /// </summary>
@@ -86,7 +87,6 @@ namespace ContactsApp1Variant2
                 throw new ArgumentException("Некорректные данные");
             }
         }
-
         /// <summary>
         /// Метод-сеттер, предназначеннный для запсии Id-страницы "ВКонтакте" экземпляра класса.
         /// </summary>
@@ -102,6 +102,7 @@ namespace ContactsApp1Variant2
             else IdVk = id;
 
         }
+
 
         /// <summary>
         /// Метод-геттер, предназначеннный для получения фамилии экземпляра класса.
@@ -134,7 +135,6 @@ namespace ContactsApp1Variant2
         {
             return Mail;
         }
-
         /// <summary>
         /// Метод-геттер, предназначеннный для получения id-старницы "ВКонтакте" экземпляра класса.
         /// </summary>
@@ -142,5 +142,6 @@ namespace ContactsApp1Variant2
         {
             return IdVk;
         }
+
     }
 }
