@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ContactsApp1Variant2;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Configuration;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 
-namespace ContactsApp1Variant2
+namespace ContactsApp
 {
     /// <summary>
     /// Класс, предназначенный для хранения информации об абоненте.
@@ -17,131 +18,152 @@ namespace ContactsApp1Variant2
     public class Contact
 
     {
-        public string Surname;
-        public string Name;
-        public PhoneNumber number = new PhoneNumber();
-        public DateTime Birthday;
-        public string Mail;
-        public int IdVk;
+        private string _name;
+        private string _surname;
+        private PhoneNumber _phoneNumber = new PhoneNumber();
+        private DateTime _birthday = DateTime.Today;
+        private string _mail;
+        private long _id;
 
 
-        /// <summary>
-        /// Метод-сеттер, предназначеннный для запсии фамилии экземпляра класса.
-        /// </summary>
-        public void SetSurname(string surname)
-        {
-            if (!string.IsNullOrEmpty(surname) && surname.Length <= 50)
-            {
-                surname = char.ToUpper(surname[0]) + surname.Substring(1);
-                Surname = surname;
-            }
-            else
-            {
-                throw new ArgumentException("Некорректные данные");
-            }
-        }
 
         /// <summary>
-        /// Метод-сеттер, предназначеннный для запсии имени экземпляра класса.
+        /// Свйоство, предназначеннное для запсии фамилии экземпляра класса.
         /// </summary>
-        public void SetName(string name)
+        public string Surname
         {
-            if (!string.IsNullOrEmpty(name) && name.Length <= 50)
+            get
             {
-                name = char.ToUpper(name[0]) + name.Substring(1);
-                Name = name;
+                return _surname;
             }
-            else
+            set
             {
-                throw new ArgumentException("Некорректные данные");
+                if (string.IsNullOrEmpty(value) || value.Length > 50)
+                {
+                    var name = nameof(Surname);
+
+                    throw new ArgumentException($"Длина {name} равна {value.Length}, " + $"а должно быть меньше 50.", name);
+
+                }
+                else
+                {
+                    value = char.ToUpper(value[0]) + value.Substring(1);
+                    _surname = value;
+                }
+
             }
         }
 
         /// <summary>
-        /// Метод-сеттер, предназначеннный для запсии даты рождения экземпляра класса.
+        /// Свйоство, предназначеннное для запсии имени экземпляра класса.
         /// </summary>
-        public void SetBirthday(DateTime birthday)
+        public string Name
         {
-            if (birthday.Year > 1900 && birthday.Date <= DateTime.Today)
+            get
             {
-                Birthday = birthday;
+                return _name;
             }
-            else
+            set
             {
-                throw new ArgumentException("Некорректные данные");
-            }
+                if (string.IsNullOrEmpty(value) || value.Length > 50)
+                {
+                    var name = nameof(Name);
 
-        }
+                    throw new ArgumentException($"Длина {name} равна {value.Length}, " + $"а должно быть меньше 50.", name);
+                }
+                else
+                {
+                    value = char.ToUpper(value[0]) + value.Substring(1);
+                    _name = value;
+                }
 
-        /// <summary>
-        /// Метод-сеттер, предназначеннный для запсии адреса электронной почты экземпляра класса.
-        /// </summary>
-        public void SetMail(string mail)
-        {
-            if (!string.IsNullOrEmpty(mail) && mail.Length <= 50)
-            {
-                Mail = mail;
-            }
-            else
-            {
-                throw new ArgumentException("Некорректные данные");
             }
         }
-        /// <summary>
-        /// Метод-сеттер, предназначеннный для запсии Id-страницы "ВКонтакте" экземпляра класса.
-        /// </summary>
-        public void SetVk(int id)
-        {
-            string ident = id.ToString();
 
-            if (string.IsNullOrEmpty(ident) && ident.Length > 15)
+        /// <summary>
+        /// Свйоство, предназначеннное для запсии номера телефона.
+        /// </summary>
+        public PhoneNumber PhoneNumber
+
+        {
+            get
             {
-                throw new ArgumentException("Неверный номер");
+                return _phoneNumber;
             }
 
-            else IdVk = id;
+            set
+            {
 
+                _phoneNumber = value;
+            }
+        }
+
+        /// <summary>
+        /// Свйоство, предназначеннное для запсии даты рождения экземпляра класса.
+        /// </summary>
+        public DateTime Birthday
+        {
+            get
+            {
+                return _birthday;
+            }
+            set
+            {
+                if (value.Year < 1900 || value.Date > DateTime.Today)
+                {
+                    throw new ArgumentException("Некорректные данные");
+                }
+                else
+                {
+                    _birthday = value;
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Свйоство, предназначеннное для запсии адреса электронной почты экземпляра класса.
+        /// </summary>
+        public string Mail
+        {
+            get
+            {
+                return _mail;
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value) || value.Length > 50)
+                {
+                    throw new ArgumentException("Некорректные данные");
+                }
+                else
+                {
+                    _mail = value;
+                }
+
+            }
         }
 
 
         /// <summary>
-        /// Метод-геттер, предназначеннный для получения фамилии экземпляра класса.
+        /// Свйоство, предназначеннное для запсии Id-страницы "ВКонтакте" экземпляра класса.
         /// </summary>
-        public string GetSurname()
+        public long Id
         {
-            return Surname;
-        }
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (value.ToString().Length > 15)
+                {
+                    throw new ArgumentException("Неверный id");
+                }
 
-        /// <summary>
-        /// Метод-геттер, предназначеннный для получения имени экземпляра класса.
-        /// </summary>
-        public string GetName()
-        {
-            return Name;
-        }
+                else _id = value;
 
-        /// <summary>
-        /// Метод-геттер, предназначеннный для получения даты рождения экземпляра класса.
-        /// </summary>
-        public DateTime GetBirthday()
-        {
-            return Birthday;
+            }
         }
-
-        /// <summary>
-        /// Метод-геттер, предназначеннный для получения адреса электронной почты экземпляра класса.
-        /// </summary>
-        public string GetMail()
-        {
-            return Mail;
-        }
-        /// <summary>
-        /// Метод-геттер, предназначеннный для получения id-старницы "ВКонтакте" экземпляра класса.
-        /// </summary>
-        public int GetVk()
-        {
-            return IdVk;
-        }
-
     }
 }

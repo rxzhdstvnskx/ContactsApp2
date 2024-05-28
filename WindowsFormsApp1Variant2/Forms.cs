@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ContactsApp;
 
-namespace ContactsApp1Variant2
+namespace ContactsApp
 {
     internal class Forms
     {

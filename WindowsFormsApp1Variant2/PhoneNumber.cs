@@ -15,39 +15,43 @@ namespace ContactsApp1Variant2
         /// Класс, хранящий номер телефона абонента, а также информацию
         /// о составе номера.
         /// </summary>
-        public long Number;
+        private long _number;
+
 
         /// <summary>
-        /// Метод-сеттер, предназначеннный для внесения номера телефона экземпляра.
+        /// Свойство, предназначенное для внесения номера телефона экземпляра.
         /// </summary>
-        public void SetNumber(long number)
+        public long Number
         {
-
-            var result = 0;
-            long temp = number;
-
-            while (temp > 0)
+            get
             {
-                temp = temp / 10;
-                result++;
+                return _number;
+            }
+            set
+            {
+                {
+                    var result = 0;
+                    long temp = value;
+
+                    while (temp > 0)
+                    {
+                        temp = temp / 10;
+                        result++;
+
+                    }
+
+                    if (result != 11 || (value / 10000000000) != 7)
+                    {
+                        throw new ArgumentException("Неверный номер");
+                    }
+                    else
+                    {
+                        _number = value;
+                    }
+
+                }
 
             }
-
-            if (result != 11 || (number / 10000000000) != 7)
-            {
-                throw new ArgumentException("Неверный номер");
-            }
-            else
-            {
-                Number = number;
-            }
-        }
-        /// <summary>
-        /// Метод-геттер, предназначеннный для получения номера телефона экземпляра.
-        /// </summary>
-        public long GetNumber()
-        {
-            return Number;
         }
     }
 }
