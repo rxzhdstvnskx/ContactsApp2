@@ -13,7 +13,7 @@ using System.Xml.Linq;
 namespace ContactsApp
 {
     /// <summary>
-    /// Класс, предназначенный для хранения информации об абоненте
+    /// Класс, предназначенный для хранения информации об абонент
     /// </summary>
     public class Contact
 
