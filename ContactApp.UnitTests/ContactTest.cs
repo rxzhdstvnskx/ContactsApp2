@@ -79,7 +79,7 @@ namespace ContactApp.UnitTests
                 contact.PhoneNumber.Number = 79095467890;
                 Console.WriteLine("Тест Surname присвоение корректной фамилии: пройден");
             }
-            catch (ArgumentException exception)
+            catch
             {
                 Console.WriteLine("Тест Surname присвоение корректной фамилии: провален");
             }

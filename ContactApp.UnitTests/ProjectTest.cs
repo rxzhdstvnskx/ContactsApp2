@@ -31,7 +31,7 @@ namespace ContactsApp
                 List<Contact> contactslist = new List<Contact>();
 
             }
-            catch (ArgumentException exception)
+            catch
             {
 
             }
